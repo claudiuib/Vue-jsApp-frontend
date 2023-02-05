@@ -321,7 +321,7 @@ addData() {
 
 //method to delete basket
 deleteBasket(order_id){
-fetch(`http://localhost:3030/collections/basket/${order_id}`, {
+fetch(`https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/basket/${order_id}`, {
   method: 'DELETE',
   headers: {
     'Content-Type': 'application/json'
