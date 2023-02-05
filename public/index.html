@@ -310,7 +310,7 @@ saveProduct(lesson){
 
 addData() {
      
-     fetch("http://localhost:3030/collections/basket")
+     fetch("https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/basket")
     .then(response => response.json())
     .then(data => {
     this.basket = data;
