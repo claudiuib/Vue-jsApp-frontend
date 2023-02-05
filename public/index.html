@@ -341,7 +341,7 @@ showCheckout() {
 submitForm(){
     if (this.nameIsValid && this.phoneIsValid && this.formIsValid) {
       //send details to the database 
-      fetch('http://localhost:3030/collections/order', {
+      fetch('https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/order', {
         method: 'post',
         headers: {
           "Content-type": "application/json"
