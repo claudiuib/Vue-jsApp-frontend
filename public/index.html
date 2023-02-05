@@ -367,7 +367,7 @@ submitForm(){
    //function to search
       
         searchProduct() {
-      fetch(`http://localhost:3030/collections/products/search?title=${this.titleSearch}`)
+      fetch(`https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/products/search?title=${this.titleSearch}`)
         .then(res => res.json())
         .then(data => {
           this.lessons= data;
