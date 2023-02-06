@@ -50,8 +50,8 @@
                     <div class="col-3">
                         <!-- search bar -->
                         <label for="site-search">Search </label>
-                        <input type="search" v-model="titleSearch" id="site-search"/>
-                        <button class=" btn btn-primary btn-lg" v-on:click="searchProduct()">Search</button>
+                        <input type="search" v-model="search" @keyup="searchProducts()"/>
+
                         
 
 
@@ -251,7 +251,7 @@
       showOrder :true,
       sortBy: "",
       direction: "ascending",
-      titleSearch: "",
+      search: "",
         
       lessons:[],
       basket:[],
@@ -364,14 +364,18 @@ submitForm(){
 
 
 
-   //function to search
+  //function to search
       
-        searchProduct() {
-      fetch(`https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/products/search?title=${this.titleSearch}`)
-        .then(res => res.json())
-        .then(data => {
-          this.lessons= data;
-        });
+  async searchProducts() {
+      try {
+        const response = await fetch(`https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/products/search?q=${this.search}`);
+        const data = await response.json();
+        const filteredProducts =  data.filter(p => p.title.includes(this.search) || p.location.includes(this.search));;
+        this.lessons = filteredProducts;
+    
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
       
