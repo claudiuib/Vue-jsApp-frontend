@@ -283,7 +283,7 @@
 
  displayData() {
      
-     fetch("https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/products")
+     fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/products")
     .then(response => response.json())
     .then(lessons => {
     this.lessons = lessons;
@@ -293,7 +293,7 @@
 
 saveProduct(lesson){
     const { title, id,price,location,image,spaces } = lesson;
-     return fetch('https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/basket',{
+     return fetch('http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/basket',{
 
       method: 'POST',
       body: JSON.stringify({title,id, price,location,image,spaces}),
@@ -310,7 +310,7 @@ saveProduct(lesson){
 
 addData() {
      
-     fetch("https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/basket")
+     fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/basket")
     .then(response => response.json())
     .then(data => {
     this.basket = data;
@@ -321,7 +321,7 @@ addData() {
 
 //method to delete basket
 deleteBasket(order_id){
-fetch(`https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/basket/${order_id}`, {
+fetch(`http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/basket/${order_id}`, {
   method: 'DELETE',
   headers: {
     'Content-Type': 'application/json'
@@ -341,7 +341,7 @@ showCheckout() {
 submitForm(){
     if (this.nameIsValid && this.phoneIsValid && this.formIsValid) {
       //send details to the database 
-      fetch('https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/order', {
+      fetch('http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/order', {
         method: 'post',
         headers: {
           "Content-type": "application/json"
@@ -368,7 +368,7 @@ submitForm(){
       
   async searchProducts() {
       try {
-        const response = await fetch(`https://cw2mobileapp-env.eba-rykv7prh.us-east-1.elasticbeanstalk.com/collections/products/search?q=${this.search}`);
+        const response = await fetch(`http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/products/search?q=${this.search}`);
         const data = await response.json();
         const filteredProducts =  data.filter(p => p.title.includes(this.search) || p.location.includes(this.search));;
         this.lessons = filteredProducts;
