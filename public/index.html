@@ -352,8 +352,8 @@ showCheckout() {
           this.showLessons = this.showLessons ? false : true;
         },
 //function to submit order 
-submitForm(){
-    if (this.nameIsValid && this.phoneIsValid && this.formIsValid) {
+ submitForm() {
+            if (this.nameIsValid && this.phoneIsValid && this.formIsValid) {
       //send details to the database 
       fetch('http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/order', {
         method: 'post',
@@ -371,24 +371,22 @@ submitForm(){
       .then(data => console.log(data))
       .catch(err => console.log(err))
      alert("Order submited")
-    //  for(let i=0;i<this.tempBasket.length;i++){
+     for(let i=0;i<this.tempBasket.length;i++){
                       
-    //                   let tempB=this.tempBasket[i];
-    //                  console.log( app.lessonLeft(tempB));
-    //                  console.log(tempB.id)
-    //                   fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/products/" + tempB.id, {
-    //                       method: "PUT",
-    //                       headers: {"Content-Type": "application/json",}, 
-    //                       body: JSON.stringify(
-    //                     {"spaces": app.productLeft(tempB)})})
-    //                     .then(function (response) {
-    //                       response.json().then(function (json) 
-    //                       {console.log(json)});});
-                  
-    //                   }
+                      let tempB=this.tempBasket[i];
+                     console.log( app.lessonLeft(tempB));
+                     console.log(tempB.id)
+                      fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/products/" + tempB.id, {
+                          method: "PUT",
+                          headers: {"Content-Type": "application/json",}, 
+                          body: JSON.stringify(
+                        {"spaces": app.productLeft(tempB)})})
+                        .then(function (response) {
+                          response.json().then(function (json) 
+                          {console.log(json)});});
 
-      
-            }
+                }
+              }
                 else{
                     alert("Error Validation Failed")
                 }
