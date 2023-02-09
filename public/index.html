@@ -301,6 +301,7 @@ saveProduct(lesson){
         'Content-Type': 'application/json'
       }
     }).then(res => res.json())
+    .then(() => this.displayData())
     .then(response => console.log('Success:', response))
     .catch(error => console.error('Error:', error));
   },
@@ -328,6 +329,7 @@ fetch(`http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collectio
   }
 })
 .then(res => res.json())
+.then(() => this.displayData())
 .then((data) => {
   console.log(data); // data received by server
 })
