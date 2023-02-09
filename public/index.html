@@ -124,7 +124,7 @@
                                         <div class="row">
                                             <div class="col text-center mt-2 mb-2">
                                                 <button class=" btn btn-primary btn-lg"
-                                                    v-on:click="saveProduct(lesson)">Add to
+                                                    v-on:click="addProduct(lesson)">Add to
                                                     cart</button>
                                                 <!-- <button disabled="true" class=" btn btn-primary btn-lg" v-else>Add to cart</button> -->
                                             </div>
@@ -255,6 +255,7 @@
         
       lessons:[],
       basket:[],
+      tempBasket:[]
       
       
     },
@@ -274,9 +275,34 @@
 
   
  methods: {
-     
+    count(id) {
+            let count = 0;
+            for (let i = 0; i < this.basket.length; i++) {
+              if (this.basket[i] == id) {
+                count++;
+              }
+            }
+            return count;
+          },
+        
+          productLeft(lessons) {
+            for(let i=0;i<this.lessons.length;i++){
+              if(product==this.lessons[i]){
+                return this.lessons[i].spaces;
+              }
+            }
+            
+          },  
    
-    
+          addProduct(lesson) {
+            if(lesson.spaces>= 1){
+                 lesson.spaces = lesson.spaces - 1;
+                this.basket.push(lesson);
+               if(!(this.tempBasket.includes(lesson))){
+                        this.tempBasket.push(lesson);
+               }
+                }
+            },
 
 
 
@@ -291,33 +317,19 @@
         });
         },
 
-saveProduct(lesson){
-    const { title, id,price,location,image,spaces } = lesson;
-     return fetch('http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/basket',{
-
-      method: 'POST',
-      body: JSON.stringify({title,id, price,location,image,spaces}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json())
-    .then(() => this.displayData())
-    .then(response => console.log('Success:', response))
-    .catch(error => console.error('Error:', error));
-  },
 
 
 
 
-addData() {
+// addData() {
      
-     fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/basket")
-    .then(response => response.json())
-    .then(data => {
-    this.basket = data;
+//      fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/basket")
+//     .then(response => response.json())
+//     .then(data => {
+//     this.basket = data;
     
-        });
-        },
+//         });
+//         },
 
 
 //method to delete basket
@@ -355,10 +367,27 @@ submitForm(){
         })
       })
       .then(response => response.json())
+      
       .then(data => console.log(data))
       .catch(err => console.log(err))
      alert("Order submited")
-  
+     for(let i=0;i<this.tempBasket.length;i++){
+                      
+                      let tempB=this.tempBasket[i];
+                     console.log( app.lessonLeft(tempB));
+                     console.log(tempB.id)
+                      fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/products/" + tempB.id, {
+                          method: "PUT",
+                          headers: {"Content-Type": "application/json",}, 
+                          body: JSON.stringify(
+                        {"spaces": app.productLeft(tempB)})})
+                        .then(function (response) {
+                          response.json().then(function (json) 
+                          {console.log(json)});});
+                  
+                      }
+
+      
         }else{
             alert("Validation failed")
         }
