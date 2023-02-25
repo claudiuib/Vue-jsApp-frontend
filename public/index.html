@@ -172,7 +172,7 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="card  my-2 mx-2 mt-5 mb-5 " style="width: 18rem;" v-for="order in basket">
+                    <div class="card  my-2 mx-2 mt-5 mb-5 " style="width: 18rem;" v-for="order in tempBasket">
                         <div class="row">
                             <div class="col">
                                 <div class="card-body">
@@ -187,7 +187,7 @@
                         </div>
                         <div class="row">
                             <div class="col text-center mt-2 mb-2">
-                                <button class="btn btn-primary" v-on:click="remove(product)">Remove</button>
+                                <button class="btn btn-primary" v-on:click="remove(order)">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -348,13 +348,13 @@
 
 // },
  
-remove: function(product){
-            if(this.card.includes(product)){
-                let index = this.card.indexOf(product);
-                this.card.splice(index, 1);
-                for (let i  = 0; i  < this.products.length; i++){
-                    if(product ==this.products[i]){
-                        this.products[i].spaces ++;
+remove: function(order){
+            if(this.basket.includes(order)){
+                let index = this.basket.indexOf(order);
+                this.basket.splice(index, 1);
+                for (let i  = 0; i  < this.lessons.length; i++){
+                    if(order ==this.lessons[i]){
+                        this.lessons[i].spaces ++;
                     }
                 }
                 }
