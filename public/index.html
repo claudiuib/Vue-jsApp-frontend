@@ -341,6 +341,7 @@ fetch(`https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/b
   }
 })
 .then(res => res.json())
+.then(() => displayData())
 .then((data) => {
   console.log(data); // data received by server
 })
