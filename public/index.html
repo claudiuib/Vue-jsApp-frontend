@@ -187,7 +187,7 @@
                         </div>
                         <div class="row">
                             <div class="col text-center mt-2 mb-2">
-                                <button class="btn btn-primary" v-on:click="deleteBasket(order._id)">Remove</button>
+                                <button class="btn btn-primary" v-on:click="remove(product)">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -333,21 +333,32 @@
 
 
 //method to delete basket
-deleteBasket(order_id){
-fetch(`https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/basket/${order_id}`, {
-  method: 'DELETE',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-.then(res => res.json())
-.then(() => displayData())
-.then((data) => {
-  console.log(data); // data received by server
-})
-.catch(err => console.log(err))
+// deleteBasket(order_id){
+// fetch(`https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/basket/${order_id}`, {
+//   method: 'DELETE',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   }
+// })
+// .then(res => res.json())
+// .then((data) => {
+//   console.log(data); // data received by server
+// })
+// .catch(err => console.log(err))
 
-},
+// },
+ 
+remove: function(product){
+            if(this.card.includes(product)){
+                let index = this.card.indexOf(product);
+                this.card.splice(index, 1);
+                for (let i  = 0; i  < this.products.length; i++){
+                    if(product ==this.products[i]){
+                        this.products[i].spaces ++;
+                    }
+                }
+                }
+          },
 showCheckout() {
           this.showLessons = this.showLessons ? false : true;
         },
